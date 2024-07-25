@@ -14,7 +14,7 @@ const Footer = () => {
                 <p className="font-semibold sm:text-left text-xl leading-[30px]">
                   Say Hello!
                 </p>
-                <div className="flex items-center sm:items-start gap-4  font-normal text-xl leading-[30px] border-2 sm:border-0 sm:px-0 px-6 py-2 rounded-md">
+                <div className="flex items-center sm:items-start gap-4  font-normal text-base sm:text-xl leading-[30px] border-2 sm:border-0 justify-center sm:justify-start py-2 rounded-md">
                   <p>opencoregroup@gmail.com</p>
                   <img className="sm:hidden" src="svgs/link.svg" alt="Link" />
                 </div>

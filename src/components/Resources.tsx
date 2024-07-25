@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Resource from "./Resource";
 import { resources } from "@/datas/resources";
 import { buttons } from "@/datas/buttons";
+import DropMenu from "./DropMenu";
 
 const Resources = () => {
   const [active, setActive] = useState<string>("All Resources");
@@ -34,7 +35,7 @@ const Resources = () => {
       );
       setFilteredResources(filtered);
     }
-  });
+  },[active]);
 
   return (
     <div className="w-full bg-[#F9FAFB] mt-5 sm:py-8 flex justify-center">
@@ -49,29 +50,7 @@ const Resources = () => {
               <img src="svgs/drop.svg" alt="" />
             </button>
             {dropdownOpen && (
-              <div className="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div
-                  className="py-1"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
-                >
-                  {buttons.map((button, index) => (
-                    <button
-                      key={index}
-                      className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left ${
-                        active === button ? "bg-gray-100" : ""
-                      }`}
-                      onClick={() => {
-                        setActive(button);
-                        setDropdownOpen(false);
-                      }}
-                    >
-                      {button}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <DropMenu active={active} setActive={setActive} setDropdownOpen={setDropdownOpen} />
             )}
           </div>
           <div className="hidden  sm:flex gap-2">
@@ -98,7 +77,9 @@ const Resources = () => {
               <Resource resource={resource} key={index} />
             ))
           ) : (
-            <p className="text-black text-4xl text-center">There is no {active} resource</p>
+            <p className="text-black text-4xl text-center">
+              There is no {active} resource
+            </p>
           )}
         </div>
       </div>
