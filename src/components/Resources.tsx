@@ -24,7 +24,7 @@ const Resources = () => {
   });
 
   return (
-    <div className="w-full bg-[#F9FAFB] mt-5 flex justify-center">
+    <div className="w-full bg-[#F9FAFB] mt-5 sm:py-8 flex justify-center">
       <div className="flex flex-col gap-8 w-[90%]">
         <div className="flex justify-between">
           <div className="relative sm:hidden" ref={dropdownRef}>
