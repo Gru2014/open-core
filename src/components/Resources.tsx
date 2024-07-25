@@ -6,6 +6,7 @@ import { buttons } from "@/datas/buttons";
 const Resources = () => {
   const [active, setActive] = useState<string>("All Resources");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [filteredResources, setFilteredResources] = useState(resources);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -21,6 +22,18 @@ const Resources = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  });
+
+  useEffect(() => {
+    if (active === "All Resources") {
+      setFilteredResources(resources);
+    } else {
+      const filtered = resources.filter(
+        (resource) =>
+          resource.link.filter((link) => link.title === active).length > 0
+      );
+      setFilteredResources(filtered);
+    }
   });
 
   return (
@@ -80,9 +93,13 @@ const Resources = () => {
           </button>
         </div>
         <div className="flex gap-12 flex-wrap  justify-center sm:justify-between mb-10 sm:mb-0">
-          {resources.map((resource, index) => (
-            <Resource resource={resource} key={index} />
-          ))}
+          {filteredResources.length > 0 ? (
+            filteredResources.map((resource, index) => (
+              <Resource resource={resource} key={index} />
+            ))
+          ) : (
+            <p className="text-black text-4xl text-center">There is no {active} resource</p>
+          )}
         </div>
       </div>
     </div>
